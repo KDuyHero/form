@@ -3,25 +3,33 @@ from urllib.request import HTTPErrorProcessor
 from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import PostForm, SendEmail
+from django.views import View
 # Create your views here.
 
-def index(request):
-    return HttpResponse("hello, this is news app")
+class IndexClass(View):
+    def get(self, request):
+        ketqua = "1234567"
+        return HttpResponse(ketqua)
 
-def add_news(request):
-    a = PostForm()
-    return render(request, 'news/form.html', {'f':a})
+
+# class add_news(View):
+#     def get(self, request):
+#         a = PostForm()
+#         return render(request, 'news/form.html', {'f':a})
     
-def save_post(request):
-    if request.method == "POST":
+class save_post(View):
+
+    def get(self, request):
+        a = PostForm()
+        return render(request, 'news/form.html', {'f':a})
+        
+    def post(self, request):
         g = PostForm(request.POST)
         if g.is_valid():
             g.save()
             return HttpResponse("saved")
         else: 
             return HttpResponse("don't saved")
-    else:
-        return HttpResponse("no post")
 
 def email_view(request):
     b= SendEmail()

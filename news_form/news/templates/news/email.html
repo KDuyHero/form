@@ -5,11 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .title{
+            border: 2px solid #ccc;
+        }
+    </style>
 </head>
 <body>
     <form action="{%url 'news:process'%}" method ="post">
         {% csrf_token %}
-        {{f}}
+        <p>Title: {{f.title}}</p>
+        <p>Content: {{f.content}}</p>
+        <p>Email: {{f.email}}</p>
+        <p>CC: {{f.cc}}</p>
         <input type="submit" value ="gửi mail">
     </form>
 </body>
